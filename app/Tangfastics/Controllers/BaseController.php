@@ -4,6 +4,7 @@ namespace Tangfastics\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Event;
 use illuminate\Support\Facades\Redirect;
 
 class BaseController extends Controller
@@ -13,6 +14,16 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->beforeFilter('csrf', ['on' => ['post', 'put', 'patch', 'delete']]);
+
+        $this->beforeFilter(function()
+        {
+            Event::fire('clockwork.controller.start');
+        });
+
+        $this->afterFilter(function()
+        {
+            Event::fire('clockwork.controller.end');
+        });
     }
 
     protected function setupLayout()

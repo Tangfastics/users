@@ -17,19 +17,24 @@
                     Login
                 </div>
                 <div class="panel-body">
-                   <div class="form-group">
-                       {{Form::label('username', 'Username')}}
-                       {{Form::text('username', null, ['class' => 'form-control input-lg', 'placeholder' => 'Username'])}}
-                   </div>
-                   <div class="form-group">
-                       {{Form::label('password', 'Password')}}
-                       {{Form::password('password', ['class' => 'form-control input-lg', 'placeholder' => 'Password'])}}
-                   </div>
-                   <div class="checkbox">
-                       <label>
-                           {{Form::checkbox('remember_me', null, true)}} Remember Me?
-                       </label>
-                   </div>
+                    <?php if(Session::has('error')): ?>
+                    <div class="alert alert-danger">
+                        <?php echo e(Session::get('error')); ?>
+                    </div>
+                    <?php endif; ?>
+                    <div class="form-group">
+                        {{Form::label('username', 'Username')}}
+                        {{Form::text('username', null, ['class' => 'form-control input-lg', 'placeholder' => 'Username', 'required' => 'required'])}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('password', 'Password')}}
+                        {{Form::password('password', ['class' => 'form-control input-lg', 'placeholder' => 'Password', 'required' => 'required'])}}
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            {{Form::checkbox('remember_me', null, true)}} Remember Me?
+                        </label>
+                    </div>
                 </div>
                 <div class="panel-footer text-right">
                     <a href="{{route('register')}}" class="btn btn-info">Register</a>

@@ -24,7 +24,7 @@ class SessionsController extends BaseController
 
         if (\Auth::attempt(\Input::only(['username', 'password']), \Input::get('remember_me'))) return \Redirect::intended('/')->withMessage(trans('sessions/store.message-success'));
 
-        // return \Redirect::back()->withError('Incorrect username/password. Please try again.');
+        return \Redirect::back()->withError('Incorrect username/password. Please try again.');
     }
 
     public function destory($id = null)

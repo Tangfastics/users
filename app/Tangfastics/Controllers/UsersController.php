@@ -2,20 +2,41 @@
 
 namespace Tangfastics\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Tangfastics\Services\Forms\Registration;
+use Tangfastics\Repositories\UserRepositoryInterface;
+use Tangfastics\Repositories\ArticleRepositoryInterface;
 
 class UsersController extends BaseController
 {
     protected $registrationForm;
 
-    public function __construct(Registration $registrationForm)
+    protected $articles;
+
+    protected $users;
+
+    protected $user;
+
+    public function __construct(ArticleRepositoryInterface $articles, UserRepositoryInterface $users, Registration $registrationForm)
     {
+        parent::__construct();
+
         $this->registrationForm = $registrationForm;
+
+        $this->articles = $articles;
+
+        $this->users = $users;
+
+        $this->user = Auth::user();
     }
 
     public function index()
     {
-        return $this->view('users.index');
+        $users = $this->users->findAllPaginated();
+
+        return $this->view('users.index', compact('users'));
     }
 
     public function create()
@@ -25,28 +46,23 @@ class UsersController extends BaseController
 
     public function store()
     {
-        // $rules = [
-        //     'username' => 'required|min:3|max:20|unique:users',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required|min:5|max:250|confirmed',
-        // ];
+        $this->registrationForm->validate(Input::all());
 
-        // $validation = \Validator::make(\Input::all(), $rules);
+        // $user = new \User;
 
-        // if ($validation->fails()) return \Redirect::back()->withInput()->withErrors($validation);
+        // $user->username = \Input::get('username');
+        // $user->email = \Input::get('email');
+        // $user->password = \Hash::make(\Input::get('password'));
 
-        $this->registrationForm->validate(\Input::all());
+        // $user->save();
 
-        $user = new \User;
+        if ($user = $this->users->create(Input::all()))
+        {
+            Auth::login($user);
 
-        $user->username = \Input::get('username');
-        $user->email = \Input::get('email');
-        $user->password = \Hash::make(\Input::get('password'));
+            return Redirect::route('home')->withMessage(trans('users/create.message-success'));
+        }
 
-        $user->save();
-
-        \Auth::login($user);
-
-        return \Redirect::route('home')->withMessage(trans('users/create.message-success'));
+        return Redirect::back()->withInput()->withError('There was a problem registering you. Please try again.');        
     }
 }
