@@ -19,7 +19,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 
     public function findAll()
     {
-        //code
+        return $this->model->orderBy('created_at', 'DESC')->all();
     }
 
     public function findAllPaginated($perPage=25)
