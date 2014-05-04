@@ -25,13 +25,13 @@
                 <img src="http://placehold.it/80" alt="Thumbnail" class="img-circle">
             </td>
             <td>
-                <strong>{{$user->username}}</strong><br>
+                <strong><a href="">{{$user->username}}</a></strong><br>
                 Joined: {{$user->created_at}}
             </td>
             <td>
                 Articles: 0
                 <br>
-                OTher Info
+                Other Info
             </td>
         </tr>
         <?php endforeach; ?>
