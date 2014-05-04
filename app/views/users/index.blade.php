@@ -27,6 +27,9 @@
             <td>
                 <strong><a href="">{{$user->username}}</a></strong><br>
                 Joined: {{$user->created_at}}
+                <br>
+                <?php if(isset($user->profile->age)): ?>Age: {{$user->profile->age}}<br><?php endif; ?>
+                <?php if(isset($user->profile->skype_address)): ?>Skype: {{$user->profile->skype_address}}<br><?php endif; ?>
             </td>
             <td>
                 Articles: 0

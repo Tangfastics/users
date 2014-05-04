@@ -29,6 +29,8 @@ class User extends Model implements UserInterface, RemindableInterface
      */
     protected $hidden = [ 'password' ];
 
+    protected $with = [ 'profile' ];
+
     /**
      * Query the user's social profile.
      *
@@ -44,9 +46,9 @@ class User extends Model implements UserInterface, RemindableInterface
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function tricks()
+    public function articles()
     {
-        return $this->hasMany('Tangfastics\Models\Trick');
+        return $this->hasMany('Tangfastics\Models\Article');
     }
 
     /**
