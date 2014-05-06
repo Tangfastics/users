@@ -29,7 +29,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 
     public function findByUsername($username)
     {
-        //code
+        return $this->model->whereUsername($username)->first();
     }
 
     public function findByEmail($email)
@@ -43,7 +43,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 
         $user->username = e($data['username']);
         $user->email = e($data['email']);
-        $user->password = Hash::make($data['password']);
+        $user->password = $data['password'];
 
         $user->save();
 

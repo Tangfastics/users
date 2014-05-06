@@ -27,6 +27,8 @@ class Article extends Model
      */
     protected $with = [ 'user' ];
 
+    protected $softDelete = true;
+
     /**
      * Query the user that posted the trick.
      *

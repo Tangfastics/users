@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        @yield('styles')
     </head>
     <body>
         <header>
@@ -28,7 +29,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{route('home')}}"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+                            {{ Navigation::make(Request::path()) }}
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             @if(Auth::guest())
@@ -38,8 +39,12 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="user-dropdown"><i class="glyphicon glyphicon-user"></i> {{Auth::user()->username}} <b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="user-dropdown">
-                                    <li role="presentation"><a href="#"><i class="glyphicon glyphicon-eye-open"></i> Profile</a></li>
+                                    <li role="presentation"><a href="{{route('profile.show', Auth::user()->username)}}"><i class="glyphicon glyphicon-eye-open"></i> Profile</a></li>
                                     <li role="presentation"><a href="#"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+                                    <?php if(Auth::user()->isAdmin()): ?>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a href="{{route('articles.create')}}"><i class="glyphicon glyphicon-pencil"></i> Create Article</a></li>
+                                <?php endif; ?>
                                     <li role="presentation" class="divider"></li>
                                     <li role="presentation"><a href="{{route('logout')}}"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
                                 </ul>
@@ -57,6 +62,13 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h4><i class="glyphicon glyphicon-ok"></i> Success!</h4>
                 {{Session::get('message')}}
+            </div>
+            @endif
+            @if(Session::has('error'))
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="glyphicon glyphicon-remove"></i> Error!</h4>
+                {{Session::get('error')}}
             </div>
             @endif
             @yield('content', 'Opps! No Content Found!')

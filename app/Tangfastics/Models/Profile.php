@@ -8,7 +8,7 @@ class Profile extends Model
 {
     protected $table = 'profiles';
 
-    protected $softDeletes = true;
+    protected $softDelete = true;
 
     public function user()
     {

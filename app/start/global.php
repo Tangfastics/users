@@ -56,6 +56,17 @@ App::error(function(Tangfastics\Services\Forms\FormValidationException $exceptio
     return Redirect::back()->withInput()->withErrors($exception->getErrors());
 });
 
+// App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception, $code)
+// {
+//     return Redirect::home()->withError('Data Not Found.');
+// });
+
+Event::listen('auth.login', function($user)
+{
+    $user->last_login = new DateTime;
+
+    $user->save();
+});
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

@@ -13,10 +13,13 @@
 
 Route::group(['namespace' => 'Tangfastics\Controllers'], function()
 {
-    Route::get('/', ['as' => 'home', 'uses' => 'UsersController@index']);
+    Route::get('/', ['as' => 'home', 'uses' => 'ArticlesController@index']);
+
+    Route::resource('articles', 'ArticlesController');
 
     Route::get('register', ['as' => 'register', 'uses' => 'UsersController@create']);
     Route::resource('users', 'UsersController', ['except' => ['destory']]);
+    Route::resource('profile', 'ProfilesController');
 
     Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
     Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destory']);

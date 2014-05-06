@@ -121,7 +121,9 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'Tangfastics\Providers\RepositoryServiceProvider',
-        'Clockwork\Support\Laravel\ClockworkServiceProvider'
+        'Clockwork\Support\Laravel\ClockworkServiceProvider',
+        'Tangfastics\Providers\NavigationServiceProvider',
+        'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
 	),
 
 	/*
@@ -188,6 +190,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+        'Navigation'     => 'Tangfastics\Facades\Navigation',
 	),
 
 );
