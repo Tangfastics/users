@@ -106,4 +106,9 @@ class UserPresenter extends BasePresenter
     {
         return $this->resource->profile->facebook ? \HTML::link($this->resource->profile->facebook, 'Visit Me') : 'Unknown';
     }
+
+    public function about_me()
+    {
+        return $this->resource->profile->about_me ?: 'Unknown';
+    }
 }

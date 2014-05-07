@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-sm-12 col-md-8 col-lg-8">
         <div class="profile-top clearfix">
             <div class="profile-bar">
                 <div class="avatar pull-left">
@@ -22,8 +22,8 @@
             <div class="profile-top-stats">
                 <div class="profile-stats pull-right">
                     <div class="btn-group">
-                        <a class="btn btn-default"><i class="glyphicon glyphicon-star"></i> <strong>123</strong> Points</a>
-                        <a class="btn btn-default"><i class="glyphicon glyphicon-user"></i> <strong>456</strong> Followers</a>
+                        <span class="btn btn-default"><i class="glyphicon glyphicon-star"></i> <strong>123</strong> Points</span>
+                        <span class="btn btn-default"><i class="glyphicon glyphicon-user"></i> <strong>456</strong> Followers</span>
                     </div>
                 </div>
                 <div class="profile-nag">
@@ -38,18 +38,18 @@
                     </span>
                 </div>
             </div>
-        </div>
-    </div>
-    <!--/.col-lg-8-->
-    <div class="col-lg-4">
+        </div><!--/.profile-top-->
         <div class="panel panel-info">
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-user"></i> About Me
             </div>
             <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, voluptatum debitis voluptas cum corporis tempore? Odit, eaque, qui, quam quaerat consequatur cum aliquam nesciunt neque ab facere quidem iusto harum.
+                {{$user->about_me}}
             </div>
         </div>
+    </div>
+    <!--/.col-lg-8-->
+    <div class="col-sm-12 col-md-4 col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-info-sign"></i> Information
