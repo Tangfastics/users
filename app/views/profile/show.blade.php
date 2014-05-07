@@ -1,4 +1,4 @@
-@section('page-title', 'Profile: Username')
+@section('page-title', trans('profiles/show.page-title', ['username' => $user->username]))
 
 @section('styles')
 <link rel="stylesheet" href="{{asset('css/profile.css')}}">
@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+{{var_dump($user->friends)}}
 <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-8">
         <div class="profile-top clearfix">
@@ -28,7 +29,7 @@
                 </div>
                 <div class="profile-nag">
                     <?php if(Auth::check() && Auth::getUser()->id == $user->id): ?>
-                    <div class="profile-btns pull-right">
+                    <div class="profile-btns pull-right hidden-xs">
                         <a href="{{route('profile.edit', $user->username)}}" class="btn btn-primary">Edit Profile</a>
                     </div>
                     <?php endif; ?>
